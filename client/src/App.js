@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import DataComponent from "./component/DataComponent";
+import DataComponent from "./component/PlayerList";
 
 function App() {
   return (
