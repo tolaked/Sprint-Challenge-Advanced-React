@@ -1,4 +1,13 @@
 import React, { Component } from "react";
+import useLocalStorage from "../hooks/useLocalStorage";
+
+const Local = val => {
+  console.log(val);
+  const [value, setValue] = useLocalStorage("data", {});
+  setValue(value);
+
+  return <div>Local</div>;
+};
 
 class DataComponent extends Component {
   constructor(props) {
@@ -13,13 +22,15 @@ class DataComponent extends Component {
     this.fetchData();
   }
 
+  //   componentWillUnmount(val) {
+  //     this.Local(val);
+  //   }
   fetchData() {
     fetch("http://localhost:5000/api/players")
       .then(res => res.json())
       .then(body => {
         // console.log("this", body);
         this.setState({ data: body });
-        console.log(this.state.data);
       });
   }
 
@@ -27,6 +38,7 @@ class DataComponent extends Component {
     const { data } = this.state;
     return (
       <div>
+        <Local val={this.state.data} />
         {data.map(el => (
           <div key={el.id}>
             <h1>{el.name}</h1>
